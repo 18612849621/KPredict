@@ -10,6 +10,13 @@ TEST(LogTest, PrintTest) {
   LOG(ERROR) << "This is ERROR.";
 }
 
+TEST(MemoryAllocatorTest, CpuTest) {
+  size_t bytes_num   = 4 * sizeof(float);
+  float *float_array = static_cast<float *>(
+      CpuMemoryAllocator::GetOrNewInstance().Allocate(bytes_num));
+  EXPECT_TRUE(float_array != nullptr);
+}
+
 int main(int argc, char **argv) {
   // 初始化 Google Test
   google::InitGoogleLogging(argv[0]);
