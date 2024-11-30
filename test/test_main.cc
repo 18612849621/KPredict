@@ -1,4 +1,5 @@
 #include "memory/memory_allocator.h"
+#include "utils/utils.h"
 #include <glog/logging.h>
 #include <gtest/gtest.h>
 #include <iostream>
