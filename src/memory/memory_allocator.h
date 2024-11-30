@@ -2,7 +2,7 @@
 #include <cstddef>
 
 class MemoryAllocator {
-  enum class DeviceType : int { CPU = 0, GPU = 1, UNKOWN = 2 };
+  enum class DeviceType : int { CPU = 0, GPU = 1, UNKNOWN = 2 };
 
 public:
   MemoryAllocator()                      = default;
@@ -11,5 +11,5 @@ public:
   virtual void  Deallocate(void *) const = 0;
 
 private:
-  DeviceType device_type_ = DeviceType::UNKOWN;
+  DeviceType device_type_ = DeviceType::UNKNOWN;
 };
