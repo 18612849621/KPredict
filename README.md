@@ -4,6 +4,15 @@
 # abstract
 本框基于 cuda11.8 搭建
 
+# config
+
+```shell
+放到setting里
+"clangd.arguments": [
+    "--compile-commands-dir=/mnt/KPredict/build"
+]
+```
+
 # script
 
 ```shell
