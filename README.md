@@ -4,11 +4,15 @@
 # abstract
 本框基于 cuda11.8 搭建
 
-# compile
+# script
 
 ```shell
+# compile
 mkdir build
 cd build
 cmake ..
 make -j8
+
+# run
+build/test --log_dir=./logs --v=3 --logtostderr
 ```
