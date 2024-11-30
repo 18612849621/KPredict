@@ -1,3 +1,0 @@
-/mnt/KPredict/build/CMakeFiles/rebuild_cache.dir
-/mnt/KPredict/build/CMakeFiles/edit_cache.dir
-/mnt/KPredict/build/CMakeFiles/test.dir
