@@ -13,7 +13,7 @@ TEST(LogTest, PrintTest) {
 TEST(MemoryAllocatorTest, CpuTest) {
   size_t bytes_num   = 4 * sizeof(float);
   float *float_array = static_cast<float *>(
-      CpuMemoryAllocator::GetOrNewInstance().Allocate(bytes_num));
+      HostMemoryAllocator::GetOrNewInstance().Allocate(bytes_num));
   EXPECT_TRUE(float_array != nullptr);
 }
 
