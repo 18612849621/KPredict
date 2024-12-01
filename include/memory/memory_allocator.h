@@ -2,6 +2,12 @@
 #include <cstddef>
 
 enum class DeviceType : int { CPU = 0, GPU = 1, UNKNOWN = 2 };
+enum class kMemcpyMode : int {
+  HostToHost     = 0,
+  HostToDevice   = 1,
+  DeviceToHost   = 2,
+  DeviceToDevice = 3
+};
 
 class MemoryAllocator {
 public:
