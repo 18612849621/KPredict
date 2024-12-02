@@ -15,7 +15,8 @@ public:
   virtual ~MemoryAllocator()             = default;
   virtual void *Allocate(size_t) const   = 0;
   virtual void  Deallocate(void *) const = 0;
-  virtual void  Memcpy(void *dst, void *src, size_t bytes_num);
+  virtual void  Memcpy(void *dst, void *src, size_t bytes_num,
+                       kMemcpyMode copy_mode = kMemcpyMode::HostToHost);
 
 protected:
   DeviceType device_type_ = DeviceType::UNKNOWN;
