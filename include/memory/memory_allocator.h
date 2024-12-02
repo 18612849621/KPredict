@@ -17,14 +17,8 @@ protected:
 
 class HostMemoryAllocator : public MemoryAllocator {
 public:
-  static HostMemoryAllocator &GetOrNewInstance() {
-    static HostMemoryAllocator instance;
-    return instance;
-  }
   void *Allocate(size_t) const override;
   void Deallocate(void *) const override;
-
-private:
   HostMemoryAllocator();
   ~HostMemoryAllocator() override;
 };

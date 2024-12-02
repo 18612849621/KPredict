@@ -12,8 +12,7 @@ TEST(LogTest, PrintTest) {
 
 TEST(MemoryAllocatorTest, CpuTest) {
   char str[] = "Hello world, CPU!";
-  MemoryAllocator *memory_allocator_ptr =
-      &HostMemoryAllocator::GetOrNewInstance();
+  MemoryAllocator *memory_allocator_ptr = new HostMemoryAllocator();
   char *test_string =
       static_cast<char *>(memory_allocator_ptr->Allocate(sizeof(str)));
   memory_allocator_ptr->Memcpy(test_string, str, sizeof(str));
