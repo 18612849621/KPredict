@@ -10,11 +10,11 @@ HostMemoryAllocator::~HostMemoryAllocator() {
   LOG(INFO) << "HostMemoryAllocator destory.";
 }
 
-void *HostMemoryAllocator::Allocate(size_t bytes_num) const {
-  if (!bytes_num) {
+void *HostMemoryAllocator::Allocate(size_t byte_num) const {
+  if (!byte_num) {
     return nullptr;
   }
-  void *mem_chunk = malloc(bytes_num);
+  void *mem_chunk = malloc(byte_num);
   return mem_chunk;
 }
 
