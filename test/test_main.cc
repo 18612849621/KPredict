@@ -17,6 +17,7 @@ TEST(MemoryAllocatorTest, CpuTest) {
       static_cast<char *>(memory_allocator_ptr->Allocate(sizeof(str)));
   memory_allocator_ptr->Memcpy(test_string, str, sizeof(str));
   LOG(INFO) << test_string;
+  memory_allocator_ptr->MemsetZero(test_string, sizeof(str));
 }
 
 int main(int argc, char **argv) {

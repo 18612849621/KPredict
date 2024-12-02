@@ -25,8 +25,23 @@ void MemoryAllocator::Memcpy(void *dst, void *src, size_t bytes_num,
     // cudaMemcpy(dst, src, bytes_num, cudaMemcpyDeviceToDevice);
     break;
   }
-  default:
+  default: {
     LOG(ERROR) << static_cast<int>(copy_mode) << "Unknown copy mode!";
     break;
+  }
+  }
+}
+
+void MemoryAllocator::MemsetZero(void *ptr, size_t bytes_num,
+                                 DeviceType device_type) {
+  switch (device_type) {
+    // 默认CPU内存 set zero
+  case DeviceType::KDeviceCPU: {
+    memset(ptr, 0, bytes_num);
+    break;
+  }
+  default: {
+    break;
+  }
   }
 }
