@@ -11,10 +11,13 @@ TEST(LogTest, PrintTest) {
 }
 
 TEST(MemoryAllocatorTest, CpuTest) {
-  size_t bytes_num   = 4 * sizeof(float);
-  float *float_array = static_cast<float *>(
-      HostMemoryAllocator::GetOrNewInstance().Allocate(bytes_num));
-  EXPECT_TRUE(float_array != nullptr);
+  char str[] = "Hello world, CPU!";
+  MemoryAllocator *memory_allocator_ptr =
+      &HostMemoryAllocator::GetOrNewInstance();
+  char *test_string =
+      static_cast<char *>(memory_allocator_ptr->Allocate(sizeof(str)));
+  memory_allocator_ptr->Memcpy(test_string, str, sizeof(str));
+  LOG(INFO) << test_string;
 }
 
 int main(int argc, char **argv) {

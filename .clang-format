@@ -19,10 +19,6 @@ BraceWrapping:
   AfterControlStatement: true
   BeforeElse: true
 
-# 代码对齐设置
-AlignConsecutiveAssignments: true
-AlignConsecutiveDeclarations: true
-
 # 调整换行的位置
 PenaltyBreakBeforeFirstCallParameter: 19
 PenaltyReturnTypeOnItsOwnLine: 60
