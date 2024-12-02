@@ -13,11 +13,15 @@ TEST(LogTest, PrintTest) {
 TEST(MemoryAllocatorTest, CpuTest) {
   char str[] = "Hello world, CPU!";
   MemoryAllocator *memory_allocator_ptr = new HostMemoryAllocator();
+  LOG(INFO) << "Device type is " << memory_allocator_ptr->device_type();
   char *test_string =
       static_cast<char *>(memory_allocator_ptr->Allocate(sizeof(str)));
   memory_allocator_ptr->Memcpy(test_string, str, sizeof(str));
-  LOG(INFO) << test_string;
+  LOG(INFO) << "Before set zero " << test_string << ", test_string size is "
+            << sizeof(test_string) << " bytes.";
   memory_allocator_ptr->MemsetZero(test_string, sizeof(str));
+  LOG(INFO) << "After set zero " << test_string << ", test_string size is "
+            << sizeof(test_string) << " bytes.";
 }
 
 int main(int argc, char **argv) {
