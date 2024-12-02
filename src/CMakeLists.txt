@@ -3,6 +3,7 @@ include_directories(
 )
 
 add_library(lib_memory STATIC
+    memory/buffer.cc
     memory/memory_allocator.cc
     memory/host_memory_allocator.cc
 )

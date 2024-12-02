@@ -1,7 +1,9 @@
 #pragma once
+#include "glog/logging.h"
 #include "utils/utils.h"
 #include "utils/utils_enum.h"
 #include <cstddef>
+#include <memory>
 
 class MemoryAllocator {
 public:
@@ -25,4 +27,25 @@ public:
   void *Allocate(size_t) const override;
   void Deallocate(void *) const override;
   ~HostMemoryAllocator() override;
+};
+
+class MemoryAllocatorFactory {
+public:
+  static std::shared_ptr<MemoryAllocator> GetInstance(DeviceType device_type) {
+    switch (device_type) {
+    case DeviceType::KDeviceCPU: {
+      static std::shared_ptr<HostMemoryAllocator> allocator_ptr =
+          std::make_shared<HostMemoryAllocator>();
+      return allocator_ptr;
+    }
+    case DeviceType::KDeviceGPU: {
+      break;
+    }
+    default: {
+      LOG(FATAL) << "Can't produce alloc from unknown device type.";
+      break;
+    }
+    }
+    return nullptr;
+  };
 };

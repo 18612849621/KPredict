@@ -4,17 +4,18 @@
 #include "utils/utils_enum.h"
 #include <memory>
 
-class buffer {
+class Buffer {
 public:
-  explicit buffer() = default;
-  explicit buffer(size_t byte_num,
-                  std::shared_ptr<MemoryAllocator> allocator = nullptr,
+  explicit Buffer() = default;
+  explicit Buffer(size_t byte_num,
+                  std::shared_ptr<MemoryAllocator> mem_allocator_ = nullptr,
                   void *ptr = nullptr);
-  virtual ~buffer();
+  virtual ~Buffer();
 
 private:
   std::shared_ptr<MemoryAllocator> mem_allocator_;
   DeviceType device_type_;
   void *ptr_;
-  size_t byte_size_;
+  size_t byte_num_;
+  DISALLOW_COPY_AND_ASSIGN(Buffer);
 };

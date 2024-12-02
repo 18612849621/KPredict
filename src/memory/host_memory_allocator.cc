@@ -21,5 +21,6 @@ void *HostMemoryAllocator::Allocate(size_t byte_num) const {
 void HostMemoryAllocator::Deallocate(void *ptr) const {
   if (ptr) {
     free(ptr);
+    ptr = nullptr;
   }
 }
