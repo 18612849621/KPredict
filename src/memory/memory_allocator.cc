@@ -3,24 +3,24 @@
 #include <cstring>
 
 void MemoryAllocator::Memcpy(void *dst, void *src, size_t bytes_num,
-                             kMemcpyMode copy_mode) {
+                             MemcpyMode copy_mode) {
   switch (copy_mode) {
-  case kMemcpyMode::HostToHost: {
+  case MemcpyMode::kMemcpyHostToHost: {
     memcpy(dst, src, bytes_num);
     break;
   }
-  case kMemcpyMode::HostToDevice: {
+  case MemcpyMode::kMemcpyHostToDevice: {
     // 这里你可以调用设备相关的内存复制函数
     // 例如 CUDA 的 cudaMemcpy
-    // cudaMemcpy(dst, src, bytes_num, cudaMemcpyHostToDevice);
+    // cudaMemcpy(dst, src, bytes_num, cudaMemcpykHostToDevice);
     break;
   }
-  case kMemcpyMode::DeviceToHost: {
+  case MemcpyMode::kMemcpyDeviceToHost: {
     // 同样，处理 Device-to-Host 的复制
     // cudaMemcpy(dst, src, bytes_num, cudaMemcpyDeviceToHost);
     break;
   }
-  case kMemcpyMode::DeviceToDevice: {
+  case MemcpyMode::kMemcpyDeviceToDevice: {
     // 处理 Device-to-Device 的复制
     // cudaMemcpy(dst, src, bytes_num, cudaMemcpyDeviceToDevice);
     break;

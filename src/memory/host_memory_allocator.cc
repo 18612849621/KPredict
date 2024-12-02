@@ -2,7 +2,7 @@
 #include "memory/memory_allocator.h"
 
 HostMemoryAllocator::HostMemoryAllocator() {
-  device_type_ = DeviceType::CPU;
+  device_type_ = DeviceType::KDeviceCPU;
   LOG(INFO) << "HostMemoryAllocator create.";
 }
 

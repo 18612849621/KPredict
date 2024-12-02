@@ -1,13 +1,6 @@
 #pragma once
+#include "utils/utils.h"
 #include <cstddef>
-
-enum class DeviceType : int { CPU = 0, GPU = 1, UNKNOWN = 2 };
-enum class kMemcpyMode : int {
-  HostToHost     = 0,
-  HostToDevice   = 1,
-  DeviceToHost   = 2,
-  DeviceToDevice = 3
-};
 
 class MemoryAllocator {
 public:
@@ -16,10 +9,10 @@ public:
   virtual void *Allocate(size_t) const   = 0;
   virtual void  Deallocate(void *) const = 0;
   virtual void  Memcpy(void *dst, void *src, size_t bytes_num,
-                       kMemcpyMode copy_mode = kMemcpyMode::HostToHost);
+                       MemcpyMode copy_mode = MemcpyMode::kMemcpyHostToHost);
 
 protected:
-  DeviceType device_type_ = DeviceType::UNKNOWN;
+  DeviceType device_type_ = DeviceType::kDeviceUnknown;
 };
 
 class HostMemoryAllocator : public MemoryAllocator {
