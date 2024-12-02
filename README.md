@@ -1,8 +1,8 @@
 # KPredict
-在线推理框架
+高性能模型推理框架
 
 # abstract
-本框基于 cuda11.8 搭建
+本框架基于 cuda11.8 搭建
 
 # config
 
