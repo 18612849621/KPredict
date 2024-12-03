@@ -1,12 +1,13 @@
 #pragma once
-#include "glog/logging.h"
-#include "utils/utils.h"
-#include "utils/utils_enum.h"
 #include <cstddef>
 #include <memory>
 
+#include "glog/logging.h"
+#include "utils/utils.h"
+#include "utils/utils_enum.h"
+
 class MemoryAllocator {
-public:
+ public:
   explicit MemoryAllocator() = default;
   virtual ~MemoryAllocator() = default;
   virtual void *Allocate(size_t) const = 0;
@@ -17,12 +18,12 @@ public:
                           DeviceType device_type = DeviceType::KDeviceCPU);
   virtual DeviceType device_type() const { return device_type_; }
 
-protected:
+ protected:
   DeviceType device_type_ = DeviceType::kDeviceUnknown;
 };
 
 class HostMemoryAllocator : public MemoryAllocator {
-public:
+ public:
   explicit HostMemoryAllocator();
   void *Allocate(size_t) const override;
   void Deallocate(void *) const override;
@@ -30,21 +31,21 @@ public:
 };
 
 class MemoryAllocatorFactory {
-public:
+ public:
   static std::shared_ptr<MemoryAllocator> GetInstance(DeviceType device_type) {
     switch (device_type) {
-    case DeviceType::KDeviceCPU: {
-      static std::shared_ptr<HostMemoryAllocator> allocator_ptr =
-          std::make_shared<HostMemoryAllocator>();
-      return allocator_ptr;
-    }
-    case DeviceType::KDeviceGPU: {
-      break;
-    }
-    default: {
-      LOG(FATAL) << "Can't produce alloc from unknown device type.";
-      break;
-    }
+      case DeviceType::KDeviceCPU: {
+        static std::shared_ptr<HostMemoryAllocator> allocator_ptr =
+            std::make_shared<HostMemoryAllocator>();
+        return allocator_ptr;
+      }
+      case DeviceType::KDeviceGPU: {
+        break;
+      }
+      default: {
+        LOG(FATAL) << "Can't produce alloc from unknown device type.";
+        break;
+      }
     }
     return nullptr;
   };

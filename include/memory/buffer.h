@@ -1,18 +1,18 @@
 #pragma once
+#include <memory>
+
 #include "memory_allocator.h"
 #include "utils/utils.h"
 #include "utils/utils_enum.h"
-#include <memory>
 
 class Buffer {
-public:
+ public:
   explicit Buffer() = default;
-  explicit Buffer(size_t byte_num,
-                  std::shared_ptr<MemoryAllocator> mem_allocator_ = nullptr,
+  explicit Buffer(size_t byte_num, std::shared_ptr<MemoryAllocator> mem_allocator_ = nullptr,
                   void *ptr = nullptr);
   virtual ~Buffer();
 
-private:
+ private:
   std::shared_ptr<MemoryAllocator> mem_allocator_;
   DeviceType device_type_;
   void *ptr_;

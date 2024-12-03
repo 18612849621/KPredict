@@ -5,7 +5,8 @@ set(GTEST_INCLUDE_DIRS /usr/local/include/gtest)
 set(CUDA_INCLUDE_DIR /usr/local/cuda-11.8/include)
 set(HEADER_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
 # library
-set(GLOG_LIBRARY /usr/local/lib64/libglog.so)
+# set(GLOG_LIBRARY /usr/local/lib64/libglog.so)
+set(GLOG_LIBRARY /usr/local/lib64/libglog.a)
 set(GMOCK_LIBRARY /usr/local/lib/libgmock.a)
 set(GTEST_LIBRARY /usr/local/lib/libgtest.a)
 

@@ -6,9 +6,7 @@ HostMemoryAllocator::HostMemoryAllocator() {
   LOG(INFO) << "HostMemoryAllocator create.";
 }
 
-HostMemoryAllocator::~HostMemoryAllocator() {
-  LOG(INFO) << "HostMemoryAllocator destory.";
-}
+HostMemoryAllocator::~HostMemoryAllocator() { LOG(INFO) << "HostMemoryAllocator destory."; }
 
 void *HostMemoryAllocator::Allocate(size_t byte_num) const {
   if (!byte_num) {
