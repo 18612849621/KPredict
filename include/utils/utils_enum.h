@@ -27,3 +27,24 @@ inline std::ostream &operator<<(std::ostream &os, const DeviceType &device_type)
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, const MemcpyMode &memcpy_mode) {
+  switch (memcpy_mode) {
+    case MemcpyMode::kMemcpyDeviceToDevice:
+      os << "kMemcpyDeviceToDevice";
+      break;
+    case MemcpyMode::kMemcpyDeviceToHost:
+      os << "kMemcpyDeviceToHost";
+      break;
+    case MemcpyMode::kMemcpyHostToDevice:
+      os << "kMemcpyHostToDevice";
+      break;
+    case MemcpyMode::kMemcpyHostToHost:
+      os << "kMemcpyHostToHost";
+      break;
+    default:
+      os << "Unknown MemcpyMode";
+      break;
+  }
+  return os;
+}

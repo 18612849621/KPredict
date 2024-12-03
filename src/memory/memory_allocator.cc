@@ -11,23 +11,19 @@ void MemoryAllocator::Memcpy(void *dst, void *src, size_t byte_num, MemcpyMode c
       break;
     }
     case MemcpyMode::kMemcpyHostToDevice: {
-      // 这里你可以调用设备相关的内存复制函数
-      // 例如 CUDA 的 cudaMemcpy
-      // cudaMemcpy(dst, src, byte_num, cudaMemcpykHostToDevice);
+      cudaMemcpy(dst, src, byte_num, cudaMemcpyHostToDevice);
       break;
     }
     case MemcpyMode::kMemcpyDeviceToHost: {
-      // 同样，处理 Device-to-Host 的复制
-      // cudaMemcpy(dst, src, byte_num, cudaMemcpyDeviceToHost);
+      cudaMemcpy(dst, src, byte_num, cudaMemcpyDeviceToHost);
       break;
     }
     case MemcpyMode::kMemcpyDeviceToDevice: {
-      // 处理 Device-to-Device 的复制
-      // cudaMemcpy(dst, src, byte_num, cudaMemcpyDeviceToDevice);
+      cudaMemcpy(dst, src, byte_num, cudaMemcpyDeviceToDevice);
       break;
     }
     default: {
-      LOG(ERROR) << static_cast<int>(copy_mode) << "Unknown copy mode!";
+      LOG(ERROR) << "Unknown copy mode.";
       break;
     }
   }
@@ -40,7 +36,12 @@ void MemoryAllocator::MemsetZero(void *ptr, size_t byte_num, DeviceType device_t
       memset(ptr, 0, byte_num);
       break;
     }
+    case DeviceType::KDeviceGPU: {
+      cudaMemset(ptr, 0, byte_num);
+      break;
+    }
     default: {
+      LOG(ERROR) << "Unknown device type.";
       break;
     }
   }

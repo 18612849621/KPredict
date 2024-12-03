@@ -48,7 +48,9 @@ class MemoryAllocatorFactory {
         return allocator_ptr;
       }
       case DeviceType::KDeviceGPU: {
-        break;
+        static std::shared_ptr<DeviceMemoryAllocator> allocator_ptr =
+            std::make_shared<DeviceMemoryAllocator>();
+        return allocator_ptr;
       }
       default: {
         LOG(FATAL) << "Can't produce alloc from unknown device type.";

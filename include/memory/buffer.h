@@ -11,6 +11,7 @@ class Buffer {
   explicit Buffer(size_t byte_num, std::shared_ptr<MemoryAllocator> mem_allocator_ = nullptr,
                   void *ptr = nullptr);
   virtual ~Buffer();
+  void *get() { return ptr_; };
 
  private:
   std::shared_ptr<MemoryAllocator> mem_allocator_;

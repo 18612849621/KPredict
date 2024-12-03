@@ -3,6 +3,7 @@
 
 #include "glog/logging.h"
 #include "memory/memory_allocator.h"
+#include "utils/utils.h"
 
 DeviceMemoryAllocator::DeviceMemoryAllocator() {
   device_type_ = DeviceType::KDeviceGPU;
@@ -15,11 +16,8 @@ void *DeviceMemoryAllocator::Allocate(size_t byte_num) const {
   if (!byte_num) {
     return nullptr;
   }
-  int id = -1;
-  cudaError_t state = cudaGetDevice(&id);
-  CHECK(state == cudaSuccess);
   void *ptr = nullptr;
-  state = cudaMalloc(&ptr, byte_num);
+  CheckCUDA(cudaMalloc(&ptr, byte_num));
   return ptr;
 }
 
