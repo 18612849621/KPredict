@@ -1,4 +1,5 @@
 #include <cuda.h>
+#include <cuda_runtime.h>
 
 #include "glog/logging.h"
 #include "memory/memory_allocator.h"
@@ -14,13 +15,16 @@ void *DeviceMemoryAllocator::Allocate(size_t byte_num) const {
   if (!byte_num) {
     return nullptr;
   }
-  void *mem_chunk = malloc(byte_num);
-  return mem_chunk;
+  int id = -1;
+  cudaError_t state = cudaGetDevice(&id);
+  CHECK(state == cudaSuccess);
+  void *ptr = nullptr;
+  state = cudaMalloc(&ptr, byte_num);
+  return ptr;
 }
 
 void DeviceMemoryAllocator::Deallocate(void *ptr) const {
   if (ptr) {
-    free(ptr);
-    ptr = nullptr;
+    cudaFree(ptr);
   }
 }
