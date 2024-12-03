@@ -1,3 +1,6 @@
+# import
+find_package(Threads REQUIRED)
+include(${CMAKE_SOURCE_DIR}/cmake/utils.cmake)
 # include
 set(COMMON_INCLUDE_DIRS /usr/include)
 set(GMOCK_INCLUDE_DIRS /usr/local/include/gmock)
@@ -5,12 +8,10 @@ set(GTEST_INCLUDE_DIRS /usr/local/include/gtest)
 set(CUDA_INCLUDE_DIR /usr/local/cuda-11.8/include)
 set(HEADER_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
 # library
-# set(GLOG_LIBRARY /usr/local/lib64/libglog.so)
-set(GLOG_LIBRARY /usr/local/lib64/libglog.a)
+find_library_if_exists(/usr/local/lib64/libglog.so /usr/local/lib64/libglog.a GLOG_LIBRARY)
+message(STATUS "GLOG Library found at: ${GLOG_LIBRARY}")
 set(GMOCK_LIBRARY /usr/local/lib/libgmock.a)
 set(GTEST_LIBRARY /usr/local/lib/libgtest.a)
-
-find_package(Threads REQUIRED)
 
 # include
 include_directories(
