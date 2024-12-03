@@ -8,5 +8,3 @@ function(find_library_if_exists LIBRARY_PATH_A LIBRARY_PATH_B RESULT_VARIABLE)
         message(FATAL_ERROR "Neither shared library nor static library found for ${LIBRARY_PATH_A} and ${LIBRARY_PATH_B}!")
     endif()
 endfunction()
-
-

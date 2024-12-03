@@ -30,6 +30,14 @@ class HostMemoryAllocator : public MemoryAllocator {
   ~HostMemoryAllocator() override;
 };
 
+class DeviceMemoryAllocator : public MemoryAllocator {
+ public:
+  explicit DeviceMemoryAllocator();
+  void *Allocate(size_t) const override;
+  void Deallocate(void *) const override;
+  ~DeviceMemoryAllocator() override;
+};
+
 class MemoryAllocatorFactory {
  public:
   static std::shared_ptr<MemoryAllocator> GetInstance(DeviceType device_type) {
