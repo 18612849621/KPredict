@@ -14,7 +14,7 @@ TEST(MemoryAllocatorTest, HostMemoryAllocatorTest) {
   LOG(INFO) << str << " | 's size is " << str_byte_size << " bytes.";
   Buffer buffer(str_byte_size, MemoryAllocatorFactory::GetInstance(DeviceType::KDeviceCPU));
   MemoryAllocator *memory_allocator_ptr =
-      MemoryAllocatorFactory::GetInstance(DeviceType::KDeviceCPU).GetMemPtr();
+      MemoryAllocatorFactory::GetInstance(DeviceType::KDeviceCPU).get();
   LOG(INFO) << "Device type is " << memory_allocator_ptr->device_type();
   char *test_string = static_cast<char *>(memory_allocator_ptr->Allocate(str_byte_size));
   memory_allocator_ptr->Memcpy(test_string, str, str_byte_size);
