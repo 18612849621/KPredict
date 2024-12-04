@@ -14,7 +14,7 @@ TEST(MemoryAllocatorTest, HostMemoryAllocatorTest) {
   LOG(INFO) << str << " | 's size is " << str_byte_size << " bytes.";
   Buffer buffer(str_byte_size, MemoryAllocatorFactory::GetInstance(DeviceType::KDeviceCPU));
   MemoryAllocator *memory_allocator_ptr =
-      MemoryAllocatorFactory::GetInstance(DeviceType::KDeviceCPU).get();
+      MemoryAllocatorFactory::GetInstance(DeviceType::KDeviceCPU).GetMemPtr();
   LOG(INFO) << "Device type is " << memory_allocator_ptr->device_type();
   char *test_string = static_cast<char *>(memory_allocator_ptr->Allocate(str_byte_size));
   memory_allocator_ptr->Memcpy(test_string, str, str_byte_size);
@@ -32,15 +32,15 @@ TEST(MemoryAllocatorTest, DeviceMemoryAllocatorTest) {
   Buffer d_buffer(str_byte_size, MemoryAllocatorFactory::GetInstance(DeviceType::KDeviceGPU));
   Buffer h_buffer(str_byte_size, MemoryAllocatorFactory::GetInstance(DeviceType::KDeviceCPU));
   // 目前手动模拟实现buffer的copy
-  host_mem_alloctor_ptr->Memcpy(d_buffer.get(), str, str_byte_size,
+  host_mem_alloctor_ptr->Memcpy(d_buffer.GetMemPtr(), str, str_byte_size,
                                 MemcpyMode::kMemcpyHostToDevice);
-  host_mem_alloctor_ptr->Memcpy(h_buffer.get(), d_buffer.get(), str_byte_size,
+  host_mem_alloctor_ptr->Memcpy(h_buffer.GetMemPtr(), d_buffer.GetMemPtr(), str_byte_size,
                                 MemcpyMode::kMemcpyDeviceToHost);
-  LOG(INFO) << "Before set zero [" << static_cast<char *>(h_buffer.get()) << "]";
-  host_mem_alloctor_ptr->MemsetZero(d_buffer.get(), str_byte_size, DeviceType::KDeviceGPU);
-  host_mem_alloctor_ptr->Memcpy(h_buffer.get(), d_buffer.get(), str_byte_size,
+  LOG(INFO) << "Before set zero [" << static_cast<char *>(h_buffer.GetMemPtr()) << "]";
+  host_mem_alloctor_ptr->MemsetZero(d_buffer.GetMemPtr(), str_byte_size, DeviceType::KDeviceGPU);
+  host_mem_alloctor_ptr->Memcpy(h_buffer.GetMemPtr(), d_buffer.GetMemPtr(), str_byte_size,
                                 MemcpyMode::kMemcpyDeviceToHost);
-  LOG(INFO) << "After set zero [" << static_cast<char *>(h_buffer.get()) << "]";
+  LOG(INFO) << "After set zero [" << static_cast<char *>(h_buffer.GetMemPtr()) << "]";
 }
 
 int main(int argc, char **argv) {
