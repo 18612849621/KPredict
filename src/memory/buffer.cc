@@ -16,3 +16,6 @@ Buffer::~Buffer() {
     mem_allocator_->Deallocate(mem_ptr_);
   }
 }
+
+bool Buffer::CopyFrom(const Buffer &buffer) { return true; }
+bool Buffer::CopyFrom(Buffer const *buffer) { return true; }

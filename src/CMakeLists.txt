@@ -16,7 +16,7 @@ add_library(lib_utils STATIC
 
 target_link_libraries(
     lib_memory PUBLIC 
-    ${CUDA_CUDA_LIBRARY} 
+    # ${CUDA_CUDA_LIBRARY} 
     ${CUDA_CUDART_LIBRARY}
 )
 
