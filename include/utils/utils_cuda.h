@@ -2,7 +2,7 @@
 #include "cuda_runtime.h"
 #include "glog/logging.h"
 
-#define CheckCUDA(state)                                         \
+#define CHECK_CUDA(state)                                         \
   do {                                                           \
     if (state != cudaSuccess) {                                  \
       LOG(ERROR) << "CUDA Error: " << cudaGetErrorString(state); \

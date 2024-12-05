@@ -17,7 +17,7 @@ void *DeviceMemoryAllocator::Allocate(size_t byte_num) const {
     return nullptr;
   }
   void *ptr = nullptr;
-  CheckCUDA(cudaMalloc(&ptr, byte_num));
+  CHECK_CUDA(cudaMalloc(&ptr, byte_num));
   return ptr;
 }
 
