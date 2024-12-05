@@ -15,8 +15,14 @@ RUN apt update && \
     make install
 
 RUN cd /workspace && git clone https://github.com/18612849621/KPredict.git && \
-    git config --global user.name 18612849621 && git config --global user.email 1354368242@qq.com
+    git config --global user.name 18612849621 && git config --global user.email 1354368242@qq.com && \
+    git config --global credential.helper 'cache --timeout=7200'
+
+RUN apt install -y neovim
 
 # 清理 apt 缓存
 RUN rm -rf /var/lib/apt/lists/*
+
+WORKDIR /workspace/KPredict
+RUN git pull
 
