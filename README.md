@@ -5,6 +5,7 @@
 本框架基于 cuda11.8 搭建
 
 * 支持内存管理
+* 支持git push https 
 
 # config
 
