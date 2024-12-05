@@ -3,6 +3,7 @@
 #include <cstring>
 
 #include "glog/logging.h"
+#include "utils/utils.h"
 
 void MemoryAllocator::Memcpy(void *dst, void *src, size_t byte_num, MemcpyMode copy_mode) {
   switch (copy_mode) {
@@ -11,15 +12,15 @@ void MemoryAllocator::Memcpy(void *dst, void *src, size_t byte_num, MemcpyMode c
       break;
     }
     case MemcpyMode::kMemcpyHostToDevice: {
-      cudaMemcpy(dst, src, byte_num, cudaMemcpyHostToDevice);
+      CHECK_CUDA(cudaMemcpy(dst, src, byte_num, cudaMemcpyHostToDevice));
       break;
     }
     case MemcpyMode::kMemcpyDeviceToHost: {
-      cudaMemcpy(dst, src, byte_num, cudaMemcpyDeviceToHost);
+      CHECK_CUDA(cudaMemcpy(dst, src, byte_num, cudaMemcpyDeviceToHost));
       break;
     }
     case MemcpyMode::kMemcpyDeviceToDevice: {
-      cudaMemcpy(dst, src, byte_num, cudaMemcpyDeviceToDevice);
+      CHECK_CUDA(cudaMemcpy(dst, src, byte_num, cudaMemcpyDeviceToDevice));
       break;
     }
     default: {

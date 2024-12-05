@@ -34,12 +34,14 @@ TEST(MemoryAllocatorTest, DeviceMemoryAllocatorTest) {
   // 目前手动模拟实现buffer的copy
   host_mem_alloctor_ptr->Memcpy(d_buffer.GetMemPtr(), str, str_byte_size,
                                 MemcpyMode::kMemcpyHostToDevice);
-  host_mem_alloctor_ptr->Memcpy(h_buffer.GetMemPtr(), d_buffer.GetMemPtr(), str_byte_size,
-                                MemcpyMode::kMemcpyDeviceToHost);
+  // host_mem_alloctor_ptr->Memcpy(h_buffer.GetMemPtr(), d_buffer.GetMemPtr(), str_byte_size,
+  //                               MemcpyMode::kMemcpyDeviceToHost);
+  h_buffer.CopyFrom(d_buffer);
   LOG(INFO) << "Before set zero [" << static_cast<char *>(h_buffer.GetMemPtr()) << "]";
   host_mem_alloctor_ptr->MemsetZero(d_buffer.GetMemPtr(), str_byte_size, DeviceType::KDeviceGPU);
-  host_mem_alloctor_ptr->Memcpy(h_buffer.GetMemPtr(), d_buffer.GetMemPtr(), str_byte_size,
-                                MemcpyMode::kMemcpyDeviceToHost);
+  h_buffer.CopyFrom(d_buffer);
+  // host_mem_alloctor_ptr->Memcpy(h_buffer.GetMemPtr(), d_buffer.GetMemPtr(), str_byte_size,
+  //                               MemcpyMode::kMemcpyDeviceToHost);
   LOG(INFO) << "After set zero [" << static_cast<char *>(h_buffer.GetMemPtr()) << "]";
 }
 
